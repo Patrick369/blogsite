@@ -1,4 +1,5 @@
-from typing import List, Optional
+from datetime import datetime
+from typing import List, Optional, Text
 
 from pydantic import BaseModel
 
@@ -31,3 +32,13 @@ class User(UserBase):
 
     class Config:
         orm_mode = True
+
+
+# Blog CreateRequest Object
+
+class BlogCreate(BaseModel):
+    title: str
+    content: Text
+    author_id: int
+    pub_date: datetime = datetime.now().strftime("%Y/%m/%d, %H:%M:%S")
+    mod_date: datetime = datetime.now().strftime("%Y/%m/%d, %H:%M:%S")
