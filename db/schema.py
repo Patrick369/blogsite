@@ -42,3 +42,6 @@ class BlogCreate(BaseModel):
     author_id: int
     pub_date: datetime = datetime.now().strftime("%Y/%m/%d, %H:%M:%S")
     mod_date: datetime = datetime.now().strftime("%Y/%m/%d, %H:%M:%S")
+
+    class Config:
+        orm_mode = True
