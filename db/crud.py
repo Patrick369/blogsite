@@ -22,3 +22,20 @@ def create_user(db: Session, user: schema.UserCreate):
     db.commit()
     db.flush(created_user)
     return created_user
+
+
+###########Blog CRUD########################
+def create_blog(db: Session, blog: schema.BlogCreate):
+    """
+    create blog of a author
+
+    :param db:
+    :param blog:
+    :return:
+    """
+    blog = models.Blog(title=blog.title, content=blog.content, pub_date=blog.pub_date, mod_date=blog.mod_date,
+                       author_id=blog.author_id)
+    db.add(blog)
+    db.commit()
+    db.flush(blog)
+    return blog
