@@ -12,19 +12,20 @@ class User(Base):
     hashed_password = Column(String(100))
     is_active = Column(Boolean, default=True)
 
-    items = relationship("Item", back_populates="owner")
+    blogs = relationship("Blog", back_populates="author")
 
 
-class Item(Base):
-    __tablename__ = "item"
-
-    id = Column(Integer, primary_key=True, index=True)
-    title = Column(String(200), index=True)
-    description = Column(String(400), index=False)
-    owner_id = Column(Integer, ForeignKey("user.id"))
-
-    owner = relationship("User", back_populates="items")
-
+#
+# class Item(Base):
+#     __tablename__ = "item"
+#
+#     id = Column(Integer, primary_key=True, index=True)
+#     title = Column(String(200), index=True)
+#     description = Column(String(400), index=False)
+#     owner_id = Column(Integer, ForeignKey("user.id"))
+#
+#     owner = relationship("User", back_populates="items")
+#
 
 # Blog entity model
 class Blog(Base):
@@ -33,8 +34,7 @@ class Blog(Base):
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String(200), index=True)
     content = Column(Text, index=False)
-    pub_date = Column(DateTime, nullable=False)
-    mod_date = Column(DateTime, nullable=False)
+    created_at = Column(DateTime, nullable=False)
+    modified_at = Column(DateTime, nullable=False)
     author_id = Column(Integer, ForeignKey("user.id"))
-
     author = relationship("User", back_populates="blogs")

@@ -33,9 +33,13 @@ def create_blog(db: Session, blog: schema.BlogCreate):
     :param blog:
     :return:
     """
-    blog = models.Blog(title=blog.title, content=blog.content, pub_date=blog.pub_date, mod_date=blog.mod_date,
+    blog = models.Blog(title=blog.title, content=blog.content, modified_at=blog.modified_at, created_at=blog.created_at,
                        author_id=blog.author_id)
     db.add(blog)
     db.commit()
     db.flush(blog)
     return blog
+
+
+def get_blog_by_title(db: Session, blog: schema.BlogCreate):
+    return db.query(models.Blog).filter(models.Blog.title == blog.title).first()

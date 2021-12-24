@@ -35,13 +35,19 @@ class User(UserBase):
 
 
 # Blog CreateRequest Object
-
 class BlogCreate(BaseModel):
     title: str
     content: Text
     author_id: int
-    pub_date: datetime = datetime.now().strftime("%Y/%m/%d, %H:%M:%S")
-    mod_date: datetime = datetime.now().strftime("%Y/%m/%d, %H:%M:%S")
+    created_at: datetime = datetime.now()
+    modified_at: datetime = datetime.now()
+
+    class Config:
+        orm_mode = True
+
+
+class Blog(BlogCreate):
+    id: int
 
     class Config:
         orm_mode = True
